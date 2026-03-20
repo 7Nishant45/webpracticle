@@ -355,12 +355,138 @@ Configure sqldatasource1 with database acess 2007.
 </html>
 
 
-    </form>
+    
+<h2>Filter and Sort</h2>
+          <!DOCTYPE html>
+<html ng-app="myApp">
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+</head>
+
+<body ng-controller="myCtrl">
+
+    <p>Original Name: {{ name }}</p>
+    <p>Uppercase: {{ name | uppercase }}</p><br>
+    <p>Lowercase: {{ name | lowercase }}</p><br>
+
+    <p>Price: {{ price | currency }}</p><br>
+    <p>Today: {{ today | date:'fullDate' }}</p><br>
+
+    <input type="text" ng-model="searchText" placeholder="Search name">
+
+    <ul>
+        <li ng-repeat="person in people | filter:searchText">
+            {{ person }}
+        </li>
+    </ul>
+
+    <h3>Ascending Order</h3>
+    <ul>
+        <li ng-repeat="name in names | orderBy">
+            {{ name }}
+        </li>
+    </ul>
+
+    <h3>Descending Order</h3>
+    <ul>
+        <li ng-repeat="name in names | orderBy:'':true">
+            {{ name }}
+        </li>
+    </ul>
+
+</body>
+
+<script>
+angular.module('myApp', [])
+.controller('myCtrl', function($scope) {
+    $scope.name = "madhuri";
+    $scope.price = 100;
+    $scope.today = new Date();
+    $scope.people = ["John", "Mary", "David", "Sara"];
+    $scope.names = ["Madhuri", "Meera", "Mohini", "Manali"];
+});
+</script>
+  <h2>Mouse Keybord Event</h2>
+             <!DOCTYPE html>
+<html ng-app="myApp">
+<head>
+    <title>Mouse and Keyboard Events</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+</head>
+
+<body ng-controller="myCtrl">
+
+<h2>Mouse and Keyboard Events Example</h2>
+
+<!-- Mouse Events -->
+<h3>Mouse Events</h3>
+
+<button ng-click="clickEvent()">Click Me</button>
+<button ng-dblclick="dblclickEvent()">Double Click Me</button>
+
+<div class="box"
+     ng-mouseover="mouseOverEvent()"
+     ng-mouseleave="mouseLeaveEvent()">
+    Move Mouse Here
+</div>
+
+<hr>
+
+<!-- Keyboard Events -->
+<h3>Keyboard Events</h3>
+
+<input type="text"
+       ng-keydown="keyDownEvent()"
+       ng-keyup="keyUpEvent()"
+       ng-keypress="keyPressEvent()"
+       placeholder="Type something here">
+
+<h3>{{ message }}</h3>
+
+<script>
+angular.module('myApp', [])
+.controller('myCtrl', function($scope) {
+
+    $scope.message = "Event message will appear here";
+
+    // Mouse Events
+    $scope.clickEvent = function() {
+        $scope.message = "Mouse Click Event Triggered!";
+    };
+
+    $scope.dblclickEvent = function() {
+        $scope.message = "Mouse Double Click Event Triggered!";
+    };
+
+    $scope.mouseOverEvent = function() {
+        $scope.message = "Mouse Over Event Triggered!";
+    };
+
+    $scope.mouseLeaveEvent = function() {
+        $scope.message = "Mouse Leave Event Triggered!";
+    };
+
+    // Keyboard Events
+    $scope.keyDownEvent = function() {
+        $scope.message = "Key Down Event Triggered!";
+    };
+
+    $scope.keyUpEvent = function() {
+        $scope.message = "Key Up Event Triggered!";
+    };
+
+    $scope.keyPressEvent = function() {
+        $scope.message = "Key Press Event Triggered!";
+    };
+
+});
+</script>
 
 </body>
 </html>
-
-        </pre>
-    </div>
+    </form>
+</html>
+</body>
+</html>
 </body>
 </html>
