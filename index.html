@@ -587,7 +587,62 @@ angular.module('myApp', [])
 
 });
 </script>
+<div>
+  4)Calculate the mean and standard deviation.
+Import numpy as np
+# Sample dataset (you can modify this)
+Data = [10, 20, 30, 40, 50]
+# Calculating mean
+Mean_value = np.mean(data)
+# Calculating standard deviation
+Std_deviation = np.std(data)
+# Displaying results
+Print(f”Mean: {mean_value}”)
+Print(f”Standard Deviation: {std_deviation}”)
 
+5)Read the CSV file.
+Import pandas as pd
+# Read the CSV file
+Df = pd.read_csv(“data.csv”)  # Replace ‘data.csv’ with your file name
+
+# Display the first few rows
+Print(“Dataset:\n”, df.head())
+
+# Calculate mean and standard deviation of a specific column (e.g., ‘Scores’)
+Mean_value = df[‘Scores’].mean()
+Std_deviation = df[‘Scores’].std()
+
+# Display results
+Print(f”\nMean: {mean_value}”)
+Print(f”Standard Deviation: {std_deviation}”)
+
+6)Perform data filtering, and calculate aggregate statistics.
+
+Import pandas as pd
+# Load dataset (Replace ‘data.csv’ with your actual file)
+Df = pd.read_csv(‘data.csv’)Z
+# Display the first few rows of the dataset
+Print(“Original Data:”)
+Print(df.head())
+
+# Filter data (Example: Select rows where ‘Age’ is greater than 25)
+Filtered_df = df[df[‘Age’] > 25]
+
+# Display filtered data
+Print(“\nFiltered Data (Age > 25):”)
+Print(filtered_df)
+
+# Calculate aggregate statistics
+Mean_age = filtered_df[‘Age’].mean()
+Median_salary = filtered_df[‘Salary’].median()
+Sum_salary = filtered_df[‘Salary’].sum()
+
+# Display aggregate statistics
+Print(“\nAggregate Statistics:”)
+Print(f”Mean Age: {mean_age}”)
+Print(f”Median Salary: {median_salary}”)
+Print(f”Total Salary Sum: {sum_salary}”)
+</div>
 </body>
 </html>
     </form>
