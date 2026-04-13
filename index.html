@@ -335,7 +335,9 @@ Configure sqldatasource1 with database acess 2007.
     </div>
     </form>
     <form>
-    <h2>Data type example</h2>
+        
+    <----Data Type --->
+        
     <!DOCTYPE html>
 <html ng-app="myApp">
 <head>
@@ -512,6 +514,8 @@ angular.module('myApp', [])
     $scope.names = ["Madhuri", "Meera", "Mohini", "Manali"];
 });
 </script>
+</body>
+</html>
   <h2>Mouse Keybord Event</h2>
              <!DOCTYPE html>
 <html ng-app="myApp">
@@ -647,7 +651,217 @@ Print(f”Total Salary Sum: {sum_salary}”)
 </html>
     </form>
 </html>
+</bodytml
+#$#$$$$Shopping List
+    <!DOCTYPE html>
+<html ng-app="app">
+<body ng-controller="ctrl">
+
+<h2>Shopping List</h2>
+
+<input ng-model="newItem" placeholder="Add item">
+<button ng-click="add()">Add</button>
+
+<br><br>
+
+<input ng-model="search" placeholder="Search">
+
+<ul>
+  <li ng-repeat="i in list | filter:search">
+    {{i}} <button ng-click="remove(i)">X</button>
+  </li>
+</ul>
+
+<p>Total: {{list.length}}</p>
+
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+<script>
+var app = angular.module("app", []);
+
+app.controller("ctrl", function($scope){
+  $scope.list = ["Milk","Bread","Eggs"];
+
+  $scope.add = function(){
+    if($scope.newItem){
+      $scope.list.push($scope.newItem);
+      $scope.newItem="";
+    }
+  };
+
+  $scope.remove = function(i){
+    $scope.list.splice($scope.list.indexOf(i),1);
+  };
+});
+</script>
+
 </body>
 </html>
+    #####JSON###$
+    <!DOCTYPE html>
+<html ng-app="jsonApp">
+<head>
+    <title>Read JSON and Display</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+</head>
+
+<body ng-controller="jsonController">
+
+    <h2>Student Details (From JSON)</h2>
+
+    <table border="1" cellpadding="8">
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Age</th>
+        </tr>
+
+        <tr ng-repeat="student in students">
+            <td>{{ student.id }}</td>
+            <td>{{ student.name }}</td>
+            <td>{{ student.age }}</td>
+        </tr>
+    </table>
+
+    <script>
+        var app = angular.module("jsonApp", []);
+
+        app.controller("jsonController", function($scope) {
+
+            // JSON Data
+            $scope.students = [
+                { "id": 1, "name": "John", "age": 20 },
+                { "id": 2, "name": "Sara", "age": 22 },
+                { "id": 3, "name": "David", "age": 19 }
+            ];
+
+        });
+    </script>
+
 </body>
 </html>
+
+    #####Login Form###
+    <!DOCTYPE html>
+<html ng-app="app">
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+</head>
+
+<body ng-controller="ctrl">
+
+<h2>Login</h2>
+
+<form ng-submit="login()">
+<input type="text" ng-model="user.u" placeholder="Username" required><br>
+<input type="password" ng-model="user.p" placeholder="Password" required><br>
+<button type="submit">Login</button>
+</form>
+
+<h3>{{msg}}</h3>
+
+<script>
+angular.module("app",[]).controller("ctrl",function($scope){
+$scope.user={};
+$scope.login=function(){
+$scope.msg=($scope.user.u=="admin" && $scope.user.p=="1234") 
+? "Login successful!" : "Invalid!";
+};
+});
+</script>
+
+</body>
+</html>
+    #### Calculator ####
+    <!DOCTYPE html>
+<html ng-app="calcApp">
+<head>
+    <title>Simple Calculator</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+</head>
+
+<body ng-controller="calcCtrl">
+
+    <h2>Simple Calculator</h2>
+
+    <input type="number" ng-model="a" placeholder="Enter first number">
+    <input type="number" ng-model="b" placeholder="Enter second number">
+    <br><br>
+
+    <button ng-click="add()">Add</button>
+    <button ng-click="sub()">Subtract</button>
+    <button ng-click="mul()">Multiply</button>
+    <button ng-click="div()">Divide</button>
+
+    <h3>Result: {{result}}</h3>
+
+<script>
+angular.module("calcApp", [])
+.controller("calcCtrl", function($scope){
+
+    $scope.add = function(){
+        $scope.result = $scope.a + $scope.b;
+    };
+
+    $scope.sub = function(){
+        $scope.result = $scope.a - $scope.b;
+    };
+
+    $scope.mul = function(){
+        $scope.result = $scope.a * $scope.b;
+    };
+
+    $scope.div = function(){
+        $scope.result = $scope.a / $scope.b;
+    };
+
+});
+</script>
+
+</body>
+</html>
+    ####Togel####
+    <!DOCTYPE html>
+<html ng-app="slideApp">
+<head>
+<title>Slide Toggle</title>
+
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular-animate.js"></script>
+
+<style>
+.box{
+  width:300px; padding:20px;
+  background:#add8e6; margin-top:10px;
+}
+
+/* Animation */
+.slide.ng-enter{
+  transition:0.5s;
+  opacity:0; height:0;
+}
+.slide.ng-enter-active{
+  opacity:1; height:100px;
+}
+</style>
+</head>
+
+<body ng-controller="ctrl">
+
+<button ng-click="show=!show">Toggle</button>
+
+<div class="box slide" ng-if="show">
+  Slide Content
+</div>
+
+<script>
+angular.module("slideApp", ['ngAnimate'])
+.controller("ctrl", function($scope){
+  $scope.show = false;
+});
+</script>
+
+</body>
+</html>
+lml 
+    htmlhtmldytmldy
+  odybodyhtmlhtml##
