@@ -335,6 +335,104 @@ Configure sqldatasource1 with database acess 2007.
     </div>
     </form>
     <form>
+
+        ------registraion-----
+        <pre> 
+         using System;
+using System.Web.UI;
+
+public partial class _Default : Page
+{
+    protected void Page_Load(object sender, EventArgs e)
+    {
+    }
+
+    protected void btnRegister_Click(object sender, EventArgs e)
+    {
+        string name = txtName.Text;
+        string email = txtEmail.Text;
+        string password = txtPassword.Text;
+
+        // Yaha DB save kar sakta hai
+        lblMessage.Text = "Registration Successful!";
+    }
+}
+
+            ------treeeNode------
+            using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace TreeView
+{
+    class TreeNode
+    {
+        public string name;
+        public List<TreeNode> children = new List<TreeNode>();
+
+    }
+    class program
+    {
+        static void printTreeNode(TreeNode node, string indent = "")
+        {
+            Console.WriteLine(indent+" "+node.name);
+            foreach (var child in node.children)
+            {
+                printTreeNode(child, indent = ""); 
+            }
+
+        }
+        static void Main(string[] args)
+        {
+            var root=new TreeNode{name="Fruits"};
+            root.children.Add(new TreeNode{name="apple"});
+            printTreeNode(root);
+
+        }
+    }
+}
+            -----login-----
+            using System;
+using System.Data.OleDb;
+using System.Configuration;
+using System.Web.UI;
+
+public partial class _Default : Page
+{
+    protected void Page_Load(object sender, EventArgs e)
+    {
+    }
+
+    protected void Button1_Click(object sender, EventArgs e)
+    {
+        string cs = ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString;
+
+        using (OleDbConnection con = new OleDbConnection(cs))
+        {
+            string query = "SELECT * FROM MyDB WHERE Username=? AND Password=?";
+            OleDbCommand cmd = new OleDbCommand(query, con);
+
+            cmd.Parameters.AddWithValue("@Username", txtUser.Text);
+            cmd.Parameters.AddWithValue("@Password", txtPass.Text);
+
+            con.Open();
+
+            OleDbDataReader dr = cmd.ExecuteReader();
+
+            if (dr.HasRows)
+            {
+                Label3.Text = "Login Successful";
+            }
+            else
+            {
+                Label3.Text = "Invalid Username or Password";
+            }
+        }
+    }
+}
+        </pre>
         
     <----Data Type --->
         
