@@ -158,7 +158,82 @@ print("MSE:", mean_squared_error(y, model2.predict(X2)))
 print("R2:", r2_score(y, model2.predict(X2)))
 </pre>
 </div>
+------Treee-----
+    import pandas as pd
+from sklearn.tree import DecisionTreeClassifier, plot_tree
+from sklearn.model_selection import train_test_split
+from sklearn import metrics
+import matplotlib.pyplot as plt
 
+df = pd.DataFrame({
+    'Age':    [22,25,47,52,46,56],
+    'Income': [15000,29000,48000,60000,52000,75000],
+    'Student':[0,1,0,0,1,1],
+    'Buys':   [0,1,1,0,1,1]
+})
+
+X = df[['Age','Income','Student']]
+y = df['Buys']
+X_train,X_test,y_train,y_test = train_test_split(X,y,test_size=0.3)
+
+model = DecisionTreeClassifier().fit(X_train, y_train)
+print('Accuracy:', metrics.accuracy_score(y_test, model.predict(X_test)))
+
+plot_tree(model, feature_names=X.columns, class_names=['No','Yes'], filled=True)
+plt.show()
+    -----logistic rg-----
+    import pandas as pd
+from sklearn.linear_model import LogisticRegression
+from sklearn.model_selection import train_test_split
+from sklearn.metrics import accuracy_score, confusion_matrix
+
+df = pd.DataFrame({
+    'Age':    [22,25,47,52,46,56,23,40,60,48],
+    'Salary': [15000,18000,52000,60000,58000,62000,20000,50000,65000,54000],
+    'Purchased': [0,0,1,1,1,1,0,1,1,1]
+})
+
+X = df[['Age','Salary']]
+y = df['Purchased']
+X_train,X_test,y_train,y_test = train_test_split(X,y,test_size=0.2)
+
+model = LogisticRegression().fit(X_train, y_train)
+y_pred = model.predict(X_test)
+
+print('Accuracy:', accuracy_score(y_test, y_pred))
+print('Confusion Matrix:\n', confusion_matrix(y_test, y_pred))
+    ----PCA----
+    import pandas as pd
+from sklearn.decomposition import PCA
+from sklearn.preprocessing import StandardScaler
+
+df = pd.DataFrame({
+    'Feature1': [2,4,6,8,10],
+    'Feature2': [1,3,5,7,9],
+    'Feature3': [5,7,9,11,13]
+})
+
+scaled = StandardScaler().fit_transform(df)
+
+pca = PCA(n_components=2)
+pc = pca.fit_transform(scaled)
+
+print(pd.DataFrame(pc, columns=['PC1','PC2']))
+print('Explained Variance:', pca.explained_variance_ratio_)
+    ----K-neighbour----
+    
+from sklearn.datasets import load_iris
+from sklearn.model_selection import train_test_split
+from sklearn.neighbors import KNeighborsClassifier
+
+X, y = load_iris(return_X_y=True)
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+
+knn = KNeighborsClassifier(n_neighbors=3)
+knn.fit(X_train, y_train)
+
+print('Accuracy:', knn.score(X_test, y_test))
+    
 <script>
 function copyCode(id) {
     var text = document.getElementById(id).innerText;
